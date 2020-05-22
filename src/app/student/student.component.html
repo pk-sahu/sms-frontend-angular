@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="alert alert-warning" *ngIf="studentForm.dirty && studentForm.invalid">Enter valid values</div>
+    <div class="alert alert-warning" *ngIf="studentForm.dirty && dateOfBirth.invalid">Enter valid Birth Date</div>
+    <div class="alert alert-warning" *ngIf="studentForm.dirty && name.invalid">Enter atleast 5 characters in name</div>
+    <form (ngSubmit)="!studentForm.invalid && saveStudent()" #studentForm="ngForm">
+        <fieldset class="form-group">
+            <label>Student Name</label>
+            <input type="text" [(ngModel)]="student.name" #name="ngModel"
+                name="name" class="form-control" required="required" minlength="5">
+        </fieldset>
+        <fieldset class="form-group">
+            <label>Date Of Birth</label>
+            <input type="date" #dateOfBirth="ngModel"
+                [ngModel]="student.dateOfBirth | date:'yyyy-MM-dd' "
+                (ngModelChange)="student.dateOfBirth = $event"
+                name="dateOfBirth" 
+                class="form-control" required="required" >
+        </fieldset>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>  
